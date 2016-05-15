@@ -11,7 +11,7 @@ bluebird.promisifyAll(redis.Multi.prototype);
 
 const client = redis.createClient();
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 const many = 5;
 const api = express.Router();
 
@@ -76,7 +76,8 @@ app.listen(port, () => console.log(`now running on port ${port}`));
 
 client.on('connect', () => {
     console.log('connected to redis');
-    // seed redis db
+    // seed redis db to prevent calling
+    // randomuser.me everytime
     getKeys().then(keys => {
         if (keys.length !== many) {
             request(`http://api.randomuser.me/?results=${many}`,
