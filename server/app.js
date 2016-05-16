@@ -17,6 +17,8 @@ const api = express.Router();
 
 app.use(bodyParser.json());
 
+app.client = client; // export redis client for testing
+
 const getKeys = () => client.keysAsync('*');
 
 api.get('/employees/ids', (req, res) =>
@@ -92,7 +94,7 @@ client.on('connect', () => {
                             client.hset(salt, keys[i], vals[i]);
                         });
                     }, results);
-                })
+                });
         }
     });
 });

@@ -5,6 +5,8 @@
     "semi": [
       "error",
       "always"
-    ]
+    ],
+    "single": "off",
+    "double": "off"
   }
 }
